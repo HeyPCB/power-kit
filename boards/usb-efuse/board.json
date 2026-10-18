@@ -1,0 +1,326 @@
+{
+  "name": "power_efuse_usb",
+  "title": "HeyPCB USB eFuse - 5 V inline protection, 2 A limit, 6.1 V clamp, TPS259251",
+  "revision": "A",
+  "brief": "USB 5 V eFuse: USB-C in, a TPS259251 eFuse limiting current to about 2 A, clamping the output at 6.1 V and riding out a 20 V input, soft start and auto-retry, output on a 5 mm screw terminal with a TVS and a green LED; 26 x 30 mm, 2 layers.",
+  "blocks": [
+    {
+      "block": "usb_c_data_5v",
+      "as": "usb",
+      "title": "USB-C 5 V in",
+      "nets": {
+        "VBUS": "VUSB"
+      }
+    },
+    {
+      "block": "efuse_tps259251_5v",
+      "as": "fuse",
+      "title": "TPS259251 eFuse",
+      "nets": {
+        "VIN": "VUSB",
+        "VOUT": "VOUT"
+      }
+    },
+    {
+      "block": "out_terminal_mx126",
+      "as": "out",
+      "title": "Output terminal + TVS",
+      "nets": {
+        "OUT_P": "VOUT"
+      }
+    },
+    {
+      "block": "led_indicator",
+      "as": "led",
+      "title": "Output LED",
+      "nets": {
+        "3V3": "VOUT"
+      },
+      "values": {
+        "D?": "Green (OUT)",
+        "R?": "2.2k"
+      }
+    }
+  ],
+  "pwrFlags": [
+    "GND",
+    "VUSB"
+  ],
+  "netClasses": [
+    {
+      "name": "PWR",
+      "nets": [
+        "VUSB",
+        "VOUT"
+      ],
+      "track": 0.8,
+      "clearance": 0.2,
+      "via": [
+        0.8,
+        0.4
+      ],
+      "why": "about 2 A at the limit; the 2 A paths are carried in board.zones, 0.8 mm is the target for the entries into the VSON's 0.5 mm-pitch pins"
+    }
+  ],
+  "board": {
+    "width": 26.0,
+    "height": 30.0,
+    "corner_radius": 2.0,
+    "layers": 2,
+    "origin": [
+      100.0,
+      100.0
+    ],
+    "rules": {
+      "clearance": 0.2,
+      "track": 0.2,
+      "via": [
+        0.6,
+        0.3
+      ],
+      "edge_clearance": 0.5,
+      "hole_to_hole": 0.5,
+      "min_through_hole": 0.3,
+      "min_track": 0.15,
+      "why_min_track": "Freerouting necks into the VSON-10's 0.5 mm-pitch pins; JLCPCB 2-layer builds 0.127 mm"
+    },
+    "notes": "2 layers: F.Cu signal + GND pour, B.Cu signal + GND pour, both poured after routing.",
+    "zones": [
+      {
+        "name": "vusb",
+        "net": "VUSB",
+        "layers": [
+          "F.Cu",
+          "B.Cu"
+        ],
+        "priority": 1,
+        "polygon": [
+          [
+            4.0,
+            7.6
+          ],
+          [
+            8.6,
+            7.6
+          ],
+          [
+            8.6,
+            13.6
+          ],
+          [
+            10.2,
+            13.6
+          ],
+          [
+            10.2,
+            16.4
+          ],
+          [
+            11.4,
+            16.4
+          ],
+          [
+            11.4,
+            19.4
+          ],
+          [
+            4.0,
+            19.4
+          ]
+        ],
+        "why": "the receptacle's VBUS pins to the input cap and the eFuse's three VIN pins: up to 2 A. On F.Cu and B.Cu, stitched: the receptacle's GND pins sit 0.8 mm from its VBUS pins and their routed tracks cut a top-layer strip (measured: VBUS reached the eFuse by one 0.2 mm, 12 mm track)",
+        "stitch": 0.9,
+        "via": [
+          0.6,
+          0.3
+        ]
+      },
+      {
+        "name": "vout",
+        "net": "VOUT",
+        "layers": [
+          "F.Cu"
+        ],
+        "priority": 2,
+        "polygon": [
+          [
+            13.2,
+            16.4
+          ],
+          [
+            17.6,
+            16.4
+          ],
+          [
+            17.6,
+            7.4
+          ],
+          [
+            23.6,
+            7.4
+          ],
+          [
+            23.6,
+            10.2
+          ],
+          [
+            19.2,
+            10.2
+          ],
+          [
+            19.2,
+            15.4
+          ],
+          [
+            21.6,
+            15.4
+          ],
+          [
+            21.6,
+            20.4
+          ],
+          [
+            18.0,
+            20.4
+          ],
+          [
+            18.0,
+            19.6
+          ],
+          [
+            13.2,
+            19.6
+          ]
+        ],
+        "why": "the eFuse's three OUT pins and the output cap up to the terminal's + pin, and down to the TVS: up to 2 A"
+      }
+    ]
+  },
+  "placement": {
+    "usb:J?": {
+      "edge": "left",
+      "y": -4.0,
+      "overhang": 0.6,
+      "why": "USB-C plugs in from the left edge"
+    },
+    "out:J?": {
+      "edge": "right",
+      "y": -4.0,
+      "overhang": 0.0,
+      "why": "output wires leave the right edge, straight across from the receptacle"
+    },
+    "fuse:U?": {
+      "at": [
+        12.2,
+        16.6
+      ],
+      "rot": 0,
+      "why": "eFuse mid-board: VIN pins (3-5) lower left toward the receptacle, OUT pins (6-8) lower right toward the terminal, control pins on its upper half"
+    },
+    "fuse:C1?": {
+      "at": [
+        7.6,
+        17.7
+      ],
+      "rot": 270,
+      "why": "input cap left of the VIN pins, VUSB pad (1) up in the VUSB zone, 1.25 mm clear of the eFuse"
+    },
+    "fuse:C2?": {
+      "at": [
+        16.8,
+        18.2
+      ],
+      "rot": 270,
+      "why": "output cap right of the OUT pins, VOUT pad (1) up in the VOUT zone, below the terminal's courtyard"
+    },
+    "fuse:R1?": {
+      "at": [
+        10.4,
+        5.0
+      ],
+      "rot": 0,
+      "why": "EN/UVLO resistor above the eFuse"
+    },
+    "fuse:R2?": {
+      "at": [
+        15.4,
+        12.4
+      ],
+      "rot": 0,
+      "why": "ILIM resistor above the eFuse's ILIM pin (10, upper right), out of the VOUT zone and clear of the spot left of the terminal where its - mark goes"
+    },
+    "out:D?": {
+      "at": [
+        20.4,
+        21.6
+      ],
+      "rot": 270,
+      "why": "output TVS below the terminal, clear of the output cap, VOUT pad at the top facing the VOUT zone"
+    },
+    "led:R?": {
+      "at": [
+        11.0,
+        22.6
+      ],
+      "rot": 0,
+      "why": "output LED below the eFuse, out of both power zones"
+    },
+    "fuse:C3?": {
+      "at": [
+        12.4,
+        12.6
+      ],
+      "rot": 0,
+      "why": "soft-start cap above the eFuse, by dV/dT (pin 1, upper left), out of both power zones"
+    }
+  },
+  "route": {
+    "passes": 30,
+    "fanout": true,
+    "solve_s": 300,
+    "why": "default ladder"
+  },
+  "stitch_pitch": 5.0,
+  "silk": {
+    "words": {
+      "led:D?": "OUT",
+      "usb:J?": "5V IN"
+    },
+    "switches": [
+      {
+        "part": "out:J?",
+        "pads": [
+          "1",
+          "2"
+        ],
+        "words": {
+          "GND": "-"
+        },
+        "else": "+",
+        "why": "+ at the terminal pin on VOUT, - at GND"
+      }
+    ],
+    "title": [
+      {
+        "text": "HeyPCB USB eFuse",
+        "y": 24.4,
+        "size": 1.2,
+        "bold": true
+      },
+      {
+        "text": "5 V  2 A limit  6.1 V clamp",
+        "y": 26.2,
+        "size": 0.8
+      },
+      {
+        "text": "rev {revision}  heypcb-kicad",
+        "y": 27.8,
+        "size": 0.8
+      }
+    ]
+  },
+  "captions": {
+    "place_3d": "USB-C on the left edge, the TPS259251 eFuse in the middle, the output terminal on the right edge.",
+    "done_3d": "TPS259251 5 V eFuse: 2 A current limit, 6.1 V output clamp, soft start, screw-terminal output with TVS and LED."
+  }
+}

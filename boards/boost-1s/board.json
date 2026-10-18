@@ -1,0 +1,244 @@
+{
+  "name": "power_boost_1s",
+  "title": "HeyPCB 1S Boost - single lithium cell to 5.1 V, MT3608",
+  "revision": "A",
+  "brief": "1S to 5 V boost: a JST PH battery input, an MT3608 asynchronous boost with a 22 uH inductor and an SS34 Schottky making 5.1 V, EN pulled up and brought out, 5V / GND / EN / BAT on a 2.54 mm header, a green 5 V LED; 28 x 30 mm, 2 layers.",
+  "blocks": [
+    {
+      "block": "batt_jst_ph_2p",
+      "as": "bat",
+      "title": "1S cell in (JST PH)",
+      "pinNets": {
+        "J?.1": "VBAT",
+        "J?.2": "GND"
+      }
+    },
+    {
+      "block": "boost_mt3608_5v",
+      "as": "boost",
+      "title": "MT3608 boost to 5.1 V",
+      "nets": {
+        "VIN": "VBAT",
+        "SW": "SW",
+        "VOUT": "5V",
+        "EN": "EN"
+      }
+    },
+    {
+      "block": "led_indicator",
+      "as": "led",
+      "title": "5 V LED",
+      "nets": {
+        "3V3": "5V"
+      },
+      "values": {
+        "D?": "Green (5V)",
+        "R?": "2.2k"
+      }
+    },
+    {
+      "block": "probe_header_1x04",
+      "as": "out",
+      "title": "Output header",
+      "values": {
+        "J?": "OUT"
+      },
+      "pinNets": {
+        "J?.1": "5V",
+        "J?.2": "GND",
+        "J?.3": "EN",
+        "J?.4": "VBAT"
+      },
+      "silk": [
+        "5V",
+        "GND",
+        "EN",
+        "BAT"
+      ]
+    }
+  ],
+  "pwrFlags": [
+    "GND",
+    "VBAT",
+    "5V"
+  ],
+  "netClasses": [
+    {
+      "name": "PWR",
+      "nets": [
+        "VBAT",
+        "SW",
+        "5V"
+      ],
+      "track": 0.8,
+      "clearance": 0.2,
+      "via": [
+        0.8,
+        0.4
+      ],
+      "why": "about 1.6 A from the cell at 3.3 V for 1 A out, and the switch current through the inductor and the SS34: 0.8 mm on a 1 oz outer layer is about 2 A at a 10 C rise (IPC-2221)"
+    }
+  ],
+  "board": {
+    "width": 28.0,
+    "height": 30.0,
+    "corner_radius": 2.0,
+    "layers": 2,
+    "origin": [
+      100.0,
+      100.0
+    ],
+    "rules": {
+      "clearance": 0.2,
+      "track": 0.2,
+      "via": [
+        0.6,
+        0.3
+      ],
+      "edge_clearance": 0.5,
+      "hole_to_hole": 0.5,
+      "min_through_hole": 0.3,
+      "min_track": 0.15,
+      "why_min_track": "Freerouting may neck a power track into a SOT-23-6 pin; JLCPCB 2-layer builds 0.127 mm"
+    },
+    "notes": "2 layers: F.Cu signal + GND pour, B.Cu signal + GND pour, both poured after routing."
+  },
+  "placement": {
+    "bat:J?": {
+      "edge": "left",
+      "y": 0.0,
+      "overhang": 0.0,
+      "why": "the cell's lead plugs in from the left edge"
+    },
+    "out:J?": {
+      "lock": [
+        12.0,
+        11.19
+      ],
+      "rot": 0,
+      "why": "output header along the right edge, pin 1 (5V) at the top; the strip left of it is kept free for its pin labels"
+    },
+    "boost:U?": {
+      "at": [
+        15.2,
+        14.4
+      ],
+      "rot": 180,
+      "why": "turned so IN faces the input on the left and SW (pin 1) points down at the inductor"
+    },
+    "boost:C1?": {
+      "at": [
+        9.6,
+        10.4
+      ],
+      "rot": 0,
+      "why": "input cap above-left of the converter, clear of the cell connector's body and of its + / - marks"
+    },
+    "boost:R3?": {
+      "at": [
+        10.0,
+        7.4
+      ],
+      "rot": 0,
+      "why": "EN pull-up to the input, above the input cap"
+    },
+    "boost:L?": {
+      "at": [
+        14.8,
+        22.6
+      ],
+      "rot": 0,
+      "why": "inductor straight below the SW pin: SW pad on the right under pin 1, VIN pad on the left"
+    },
+    "boost:D?": {
+      "at": [
+        21.0,
+        22.6
+      ],
+      "rot": 180,
+      "why": "SS34 straight out from the inductor's SW pad, anode left, cathode right"
+    },
+    "boost:C2?": {
+      "at": [
+        19.6,
+        27.0
+      ],
+      "rot": 0,
+      "why": "output cap below the diode's cathode"
+    },
+    "boost:C3?": {
+      "at": [
+        24.4,
+        27.0
+      ],
+      "rot": 0,
+      "why": "second output cap, at the diode's cathode below the header"
+    },
+    "boost:R1?": {
+      "at": [
+        19.0,
+        11.6
+      ],
+      "rot": 90,
+      "why": "feedback divider top, by FB, left of the header's label strip"
+    },
+    "boost:R2?": {
+      "at": [
+        19.0,
+        8.0
+      ],
+      "rot": 90,
+      "why": "feedback divider bottom"
+    },
+    "led:R?": {
+      "at": [
+        11.0,
+        3.6
+      ],
+      "why": "5 V LED along the top edge"
+    }
+  },
+  "route": {
+    "passes": 30,
+    "fanout": true,
+    "solve_s": 300,
+    "why": "default ladder"
+  },
+  "stitch_pitch": 5.0,
+  "silk": {
+    "words": {
+      "led:D?": "5V"
+    },
+    "switches": [
+      {
+        "part": "bat:J?",
+        "pads": [
+          "1",
+          "2"
+        ],
+        "words": {
+          "GND": "-"
+        },
+        "else": "+",
+        "why": "+ beside the pad on VBAT, - beside GND: JST PH cells do not agree on polarity"
+      }
+    ],
+    "title": [
+      {
+        "text": "HeyPCB 1S Boost",
+        "y": 26.2,
+        "size": 1.2,
+        "bold": true
+      },
+      {
+        "text": "1S in / 5.1 V out  rev {revision}",
+        "y": 28.0,
+        "size": 0.8
+      }
+    ]
+  },
+  "captions": {
+    "place_3d": "JST PH cell input on the left edge, the MT3608 in the middle with the inductor and SS34 below, the output header on the right edge.",
+    "done_3d": "MT3608 boost from one lithium cell to 5.1 V, 22 uH inductor, SS34 Schottky, 5V / GND / EN / BAT header."
+  }
+}

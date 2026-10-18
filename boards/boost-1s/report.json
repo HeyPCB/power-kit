@@ -1,0 +1,553 @@
+{
+  "parts": {
+    "bound": 13,
+    "unsourced": 0,
+    "conflicts": 0,
+    "refs_by_status": {
+      "bound": [
+        "J1",
+        "U1",
+        "L1",
+        "D1",
+        "C1",
+        "C2",
+        "C3",
+        "R1",
+        "R2",
+        "R3",
+        "D2",
+        "R4",
+        "J2"
+      ],
+      "unsourced": [],
+      "conflict": []
+    },
+    "not_in_bom": [],
+    "extended_distinct": [
+      "C12624",
+      "C167883",
+      "C173752",
+      "C2691448",
+      "C84817"
+    ],
+    "extended_fee_usd": 15.0,
+    "findings": [
+      {
+        "code": "jlcpcb_extended_parts",
+        "severity": "info",
+        "detail": "5 distinct Extended parts, about $15 in JLC loading fees",
+        "fix": "swap an Extended part for a Basic one where the table lists one"
+      }
+    ],
+    "table": "lcsc_pinned.json",
+    "table_source": "HeyPCB runner/cache/jlcparts/cache.sqlite3, table jlc_components, queried 2026-09-26. Each row's `snapshot` is that row's fetched_at."
+  },
+  "compose": {
+    "components": 13,
+    "nets": 7,
+    "noConnects": [
+      "U1.6"
+    ],
+    "ran": true,
+    "seconds": 1.0
+  },
+  "schematic": {
+    "paper": "A3",
+    "file": "power_boost_1s.kicad_sch",
+    "ran": true,
+    "seconds": 0.2
+  },
+  "erc": {
+    "ran": true,
+    "errors": 0,
+    "warnings": 0,
+    "types": [],
+    "seconds": 1.1
+  },
+  "netlist": {
+    "ok": true,
+    "missing": [],
+    "extra": [],
+    "differ": [],
+    "nets": 7,
+    "ran": true,
+    "seconds": 0.2
+  },
+  "board": {
+    "footprints": 13,
+    "outline_mm": [
+      28.0,
+      30.0
+    ],
+    "stackup": {
+      "copper": 2,
+      "layers": [
+        "F.Cu",
+        "B.Cu"
+      ],
+      "planes": {},
+      "plane_layers": [],
+      "signal_layers": [
+        "F.Cu",
+        "B.Cu"
+      ],
+      "dfm_profile": "jlcpcb_2layer"
+    },
+    "ran": true,
+    "seconds": 0.3
+  },
+  "place": {
+    "parts": 13,
+    "log": [
+      "J2 -> (26.00, 11.19) rot 0 : rung 0 lock: output header along the right edge, pin 1 (5V) at the top; the strip left of it is kept free for its pin labels",
+      "J1 -> (6.30, 14.00) rot 270 : rung 2 edge connector on the left edge, mouth outward",
+      "U1 -> (15.20, 14.40) rot 180 : rung 3 block anchor at the brief's target (boost): turned so IN faces the input on the left and SW (pin 1) points down at the inductor",
+      "C1 -> (9.60, 9.65) rot 0 : rung 3 block anchor at the brief's target (boost): input cap above-left of the converter, clear of the cell connector's body and of its + / - marks",
+      "C2 -> (19.60, 27.00) rot 0 : rung 3 block anchor at the brief's target (boost): output cap below the diode's cathode",
+      "C3 -> (24.90, 27.00) rot 0 : rung 3 block anchor at the brief's target (boost): second output cap, at the diode's cathode below the header",
+      "D1 -> (21.00, 23.10) rot 180 : rung 3 block anchor at the brief's target (boost): SS34 straight out from the inductor's SW pad, anode left, cathode right",
+      "L1 -> (14.30, 22.60) rot 0 : rung 3 block anchor at the brief's target (boost): inductor straight below the SW pin: SW pad on the right under pin 1, VIN pad on the left",
+      "R1 -> (19.00, 11.60) rot 90 : rung 3 block anchor at the brief's target (boost): feedback divider top, by FB, left of the header's label strip",
+      "R2 -> (19.00, 7.75) rot 90 : rung 3 block anchor at the brief's target (boost): feedback divider bottom",
+      "R3 -> (10.00, 6.90) rot 0 : rung 3 block anchor at the brief's target (boost): EN pull-up to the input, above the input cap",
+      "R4 -> (11.00, 3.60) rot 0 : rung 3 block anchor at the brief's target (led): 5 V LED along the top edge",
+      "D2 -> (14.40, 3.60) rot 180 : rung 7 satellite of R4.2 (D2_LED_A) (shelf R of R4)"
+    ],
+    "ran": true,
+    "seconds": 0.0
+  },
+  "route": {
+    "before": 24,
+    "after": 0,
+    "open_by_net": {},
+    "fixes": [],
+    "passes": [
+      [
+        1,
+        1
+      ],
+      [
+        2,
+        0
+      ],
+      [
+        3,
+        0
+      ]
+    ],
+    "stats": {
+      "tracks": 71,
+      "vias": 4,
+      "length_mm": 196.6,
+      "length_by_layer_mm": {
+        "B.Cu": 68.6,
+        "F.Cu": 128.0
+      }
+    },
+    "layers": [
+      [
+        "F.Cu",
+        "signal"
+      ],
+      [
+        "B.Cu",
+        "signal"
+      ]
+    ],
+    "ladder": [
+      {
+        "rung": 1,
+        "tag": "1_fanout",
+        "classes": {},
+        "fanout": true,
+        "export": {
+          "poursWithheld": 0,
+          "keepoutsMirrored": 0,
+          "clearanceBumpedTo_mm": null,
+          "powerLayers": [],
+          "rewritten": [],
+          "pinShapesOnPlanesDropped": 0,
+          "planes": 0,
+          "canonical": {
+            "images": 9,
+            "renamed": 0,
+            "nets": 8
+          },
+          "viaViaClearance_mm": null
+        },
+        "seconds": 2.9,
+        "ok": true,
+        "log": {
+          "nets": {},
+          "timedOut": false,
+          "noProgress": false,
+          "last_unrouted": 0,
+          "read": true
+        },
+        "widths": {
+          "snapped": 0,
+          "widened": 8,
+          "kept_narrow": 0,
+          "raised_to_min": 0,
+          "below_min_deleted": 0
+        },
+        "shorts_deleted": 0,
+        "keepout_deleted": 0,
+        "drc": {
+          "ran": true,
+          "electrical": 0,
+          "unconnected": 0,
+          "score": 0,
+          "types": {},
+          "shorts": 0,
+          "keepout": 0
+        },
+        "open": 0,
+        "open_by_net": {},
+        "stats": {
+          "tracks": 71,
+          "vias": 4,
+          "length_mm": 196.6,
+          "length_by_layer_mm": {
+            "B.Cu": 68.6,
+            "F.Cu": 128.0
+          }
+        }
+      },
+      {
+        "rung": 1,
+        "tag": "1_nofanout",
+        "classes": {},
+        "fanout": false,
+        "export": {
+          "poursWithheld": 0,
+          "keepoutsMirrored": 0,
+          "clearanceBumpedTo_mm": null,
+          "powerLayers": [],
+          "rewritten": [],
+          "pinShapesOnPlanesDropped": 0,
+          "planes": 0,
+          "canonical": {
+            "images": 9,
+            "renamed": 0,
+            "nets": 8
+          },
+          "viaViaClearance_mm": null
+        },
+        "seconds": 2.7,
+        "ok": true,
+        "log": {
+          "nets": {},
+          "timedOut": false,
+          "noProgress": false,
+          "last_unrouted": 0,
+          "read": true
+        },
+        "widths": {
+          "snapped": 0,
+          "widened": 0,
+          "kept_narrow": 0,
+          "raised_to_min": 0,
+          "below_min_deleted": 0
+        },
+        "shorts_deleted": 0,
+        "keepout_deleted": 0,
+        "drc": {
+          "ran": true,
+          "electrical": 0,
+          "unconnected": 0,
+          "score": 0,
+          "types": {},
+          "shorts": 0,
+          "keepout": 0
+        },
+        "open": 0,
+        "open_by_net": {},
+        "stats": {
+          "tracks": 75,
+          "vias": 3,
+          "length_mm": 209.3,
+          "length_by_layer_mm": {
+            "B.Cu": 39.6,
+            "F.Cu": 169.6
+          }
+        }
+      }
+    ],
+    "kept_rung": "1_fanout",
+    "classes_routed": {},
+    "fanout_kept": true,
+    "fanout_compare": {
+      "1_fanout": {
+        "open": 0,
+        "score": 0,
+        "vias": 4,
+        "seconds": 2.9
+      },
+      "1_nofanout": {
+        "open": 0,
+        "score": 0,
+        "vias": 3,
+        "seconds": 2.7
+      }
+    },
+    "pad_vias": [],
+    "timedOut": false,
+    "noProgress": false,
+    "ran": true,
+    "seconds": 8.2
+  },
+  "pour": {
+    "plan": [
+      {
+        "layer": "F.Cu",
+        "net": "GND",
+        "priority": 0
+      },
+      {
+        "layer": "B.Cu",
+        "net": "GND",
+        "priority": 0
+      }
+    ],
+    "open_before": 0,
+    "open_after_pour": 0,
+    "stitch_vias": 20,
+    "open_after_stitch": 0,
+    "island_repair_vias": 0,
+    "open_final": 0,
+    "zones": [],
+    "stats": {
+      "tracks": 71,
+      "vias": 24,
+      "length_mm": 196.6,
+      "length_by_layer_mm": {
+        "B.Cu": 68.6,
+        "F.Cu": 128.0
+      }
+    },
+    "ran": true,
+    "seconds": 0.2
+  },
+  "silk": {
+    "silk_clipped": 7,
+    "footprint_strokes_widened": 47,
+    "pin_labels": 8,
+    "silk_refused": [],
+    "words": 3,
+    "refs_seated": 9,
+    "refs_hidden": 2,
+    "title_offset_mm": [
+      0.0,
+      0.0
+    ],
+    "title_lines": 2,
+    "stitch_vias_displaced": 3,
+    "ran": true,
+    "seconds": 0.2
+  },
+  "drc": {
+    "ran": true,
+    "state": "fresh",
+    "board_sha": "6f7564fbe73cf6cde07719d4f161d965a4e0df20a0e03b281e27f555d1630170",
+    "errors": 0,
+    "warnings": 1,
+    "unconnected": 0,
+    "parity": 0,
+    "error_types": {},
+    "warning_types": {
+      "lib_footprint_mismatch": 1
+    },
+    "repairs": [],
+    "seconds": 1.3
+  },
+  "dfm": {
+    "ran": true,
+    "profile": "jlcpcb_2layer",
+    "copper_layers": 2,
+    "errors": 0,
+    "warnings": 0,
+    "rows": []
+  },
+  "fab": {
+    "gerbers": [
+      "power_boost_1s-B_Cu.gbl",
+      "power_boost_1s-B_Mask.gbs",
+      "power_boost_1s-B_Paste.gbp",
+      "power_boost_1s-B_Silkscreen.gbo",
+      "power_boost_1s-Edge_Cuts.gm1",
+      "power_boost_1s-F_Cu.gtl",
+      "power_boost_1s-F_Mask.gts",
+      "power_boost_1s-F_Paste.gtp",
+      "power_boost_1s-F_Silkscreen.gto",
+      "power_boost_1s-job.gbrjob"
+    ],
+    "copper_layers": 2,
+    "copper_gerbers": [
+      "power_boost_1s-F_Cu.gtl",
+      "power_boost_1s-B_Cu.gbl"
+    ],
+    "gerber_job": {
+      "file": "power_boost_1s-job.gbrjob",
+      "layer_number": 2,
+      "board_thickness_mm": 1.6,
+      "copper_files": [
+        "power_boost_1s-F_Cu.gtl",
+        "power_boost_1s-B_Cu.gbl"
+      ],
+      "copper_mm": [
+        0.035,
+        0.035
+      ],
+      "dielectric_mm": [
+        1.51
+      ],
+      "dielectric": [
+        "FR4"
+      ]
+    },
+    "drill": [
+      "power_boost_1s.drl",
+      "power_boost_1s-drl_map.gbr"
+    ],
+    "zip": "power_boost_1s_gerbers.zip",
+    "pos": "power_boost_1s_pos.csv",
+    "cpl": "power_boost_1s_cpl_jlc.csv",
+    "cpl_fit": {
+      "rows": 13,
+      "fitted": 13,
+      "table": [],
+      "pin_to_pad_max_mm": 0.2,
+      "lands": {
+        "fetched": 0
+      },
+      "parts": {
+        "C1": {
+          "source": "fitted",
+          "lcsc": "C12891",
+          "turn": 0,
+          "rms_mm": 0.1176,
+          "next_mm": 2.1707,
+          "pin_to_pad_max_mm": 0.118
+        },
+        "C2": {
+          "source": "fitted",
+          "lcsc": "C12891",
+          "turn": 0,
+          "rms_mm": 0.1176,
+          "next_mm": 2.1707,
+          "pin_to_pad_max_mm": 0.118
+        },
+        "C3": {
+          "source": "fitted",
+          "lcsc": "C12891",
+          "turn": 0,
+          "rms_mm": 0.1176,
+          "next_mm": 2.1707,
+          "pin_to_pad_max_mm": 0.118
+        },
+        "D1": {
+          "source": "fitted",
+          "lcsc": "C8678",
+          "turn": 0,
+          "rms_mm": 0.1999,
+          "next_mm": 2.9731,
+          "pin_to_pad_max_mm": 0.2
+        },
+        "D2": {
+          "source": "fitted",
+          "lcsc": "C12624",
+          "turn": 0,
+          "rms_mm": 0.0385,
+          "next_mm": 1.0867,
+          "pin_to_pad_max_mm": 0.039
+        },
+        "J1": {
+          "source": "fitted",
+          "lcsc": "C173752",
+          "turn": 180,
+          "rms_mm": 0.0,
+          "next_mm": 1.4142,
+          "pin_to_pad_max_mm": 0.0
+        },
+        "J2": {
+          "source": "fitted",
+          "lcsc": "C2691448",
+          "turn": 270,
+          "rms_mm": 0.0,
+          "next_mm": 4.0161,
+          "pin_to_pad_max_mm": 0.0
+        },
+        "L1": {
+          "source": "fitted",
+          "lcsc": "C167883",
+          "turn": 0,
+          "rms_mm": 0.0001,
+          "next_mm": 2.1214,
+          "pin_to_pad_max_mm": 0.0
+        },
+        "R1": {
+          "source": "fitted",
+          "lcsc": "C22809",
+          "turn": 0,
+          "rms_mm": 0.0716,
+          "next_mm": 1.1172,
+          "pin_to_pad_max_mm": 0.072
+        },
+        "R2": {
+          "source": "fitted",
+          "lcsc": "C22975",
+          "turn": 0,
+          "rms_mm": 0.0716,
+          "next_mm": 1.1172,
+          "pin_to_pad_max_mm": 0.072
+        },
+        "R3": {
+          "source": "fitted",
+          "lcsc": "C25803",
+          "turn": 0,
+          "rms_mm": 0.0716,
+          "next_mm": 1.1172,
+          "pin_to_pad_max_mm": 0.072
+        },
+        "R4": {
+          "source": "fitted",
+          "lcsc": "C4190",
+          "turn": 0,
+          "rms_mm": 0.0716,
+          "next_mm": 1.1172,
+          "pin_to_pad_max_mm": 0.072
+        },
+        "U1": {
+          "source": "fitted",
+          "lcsc": "C84817",
+          "turn": 270,
+          "rms_mm": 0.0116,
+          "next_mm": 1.9539,
+          "pin_to_pad_max_mm": 0.012
+        }
+      }
+    },
+    "bom": "power_boost_1s_bom.csv",
+    "schematic_pdf": "power_boost_1s_schematic.pdf",
+    "step": "power_boost_1s.step",
+    "ready": true,
+    "blockers": [],
+    "drc_state": "fresh",
+    "ran": true,
+    "seconds": 1.7
+  },
+  "view3d": {
+    "frames": 63,
+    "ran": true,
+    "seconds": 0.0
+  },
+  "render": {
+    "seconds": 125.3,
+    "ran": true
+  },
+  "video": {
+    "seconds": 11.0,
+    "ran": true
+  }
+}

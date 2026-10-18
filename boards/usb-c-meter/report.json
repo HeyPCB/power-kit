@@ -1,0 +1,720 @@
+{
+  "parts": {
+    "bound": 8,
+    "unsourced": 0,
+    "conflicts": 0,
+    "refs_by_status": {
+      "bound": [
+        "J1",
+        "J2",
+        "U1",
+        "R1",
+        "C1",
+        "R2",
+        "R3",
+        "J3"
+      ],
+      "unsourced": [],
+      "conflict": []
+    },
+    "not_in_bom": [],
+    "extended_distinct": [
+      "C105362",
+      "C160404",
+      "C165948",
+      "C49851"
+    ],
+    "extended_fee_usd": 12.0,
+    "findings": [
+      {
+        "code": "jlcpcb_extended_parts",
+        "severity": "info",
+        "detail": "4 distinct Extended parts, about $12 in JLC loading fees",
+        "fix": "swap an Extended part for a Basic one where the table lists one"
+      }
+    ],
+    "table": "lcsc_pinned.json",
+    "table_source": "HeyPCB runner/cache/jlcparts/cache.sqlite3, table jlc_components, queried 2026-09-26. Each row's `snapshot` is that row's fetched_at."
+  },
+  "compose": {
+    "components": 8,
+    "nets": 10,
+    "noConnects": [
+      "J1.A8",
+      "J1.B8",
+      "J2.A8",
+      "J2.B8",
+      "U1.3"
+    ],
+    "ran": true,
+    "seconds": 1.3
+  },
+  "schematic": {
+    "paper": "A3",
+    "file": "power_usb_meter.kicad_sch",
+    "ran": true,
+    "seconds": 0.2
+  },
+  "erc": {
+    "ran": true,
+    "errors": 0,
+    "warnings": 0,
+    "types": [],
+    "seconds": 0.9
+  },
+  "netlist": {
+    "ok": true,
+    "missing": [],
+    "extra": [],
+    "differ": [],
+    "nets": 10,
+    "ran": true,
+    "seconds": 0.2
+  },
+  "board": {
+    "footprints": 8,
+    "outline_mm": [
+      32.0,
+      24.0
+    ],
+    "stackup": {
+      "copper": 2,
+      "layers": [
+        "F.Cu",
+        "B.Cu"
+      ],
+      "planes": {},
+      "plane_layers": [],
+      "signal_layers": [
+        "F.Cu",
+        "B.Cu"
+      ],
+      "dfm_profile": "jlcpcb_2layer"
+    },
+    "ran": true,
+    "seconds": 0.3
+  },
+  "place": {
+    "parts": 8,
+    "log": [
+      "J3 -> (16.00, 3.70) rot 180 : rung 0 lock: Qwiic cable leaves the top edge; locked 1.1 mm in from where edge placement put it, whose mounting pads touched the edge (0 mm, DRC)",
+      "J1 -> (3.10, 14.00) rot 270 : rung 2 edge connector on the left edge, mouth outward",
+      "J2 -> (28.90, 14.00) rot 90 : rung 2 edge connector on the right edge, mouth outward",
+      "U1 -> (16.00, 10.40) rot 0 : rung 3 block anchor at the brief's target (mon): INA226 just above the shunt: Vin+ / Vin- (pins 10 / 9) close to its pads, I2C pins toward the Qwiic connector",
+      "C1 -> (11.15, 10.40) rot 90 : rung 3 block anchor at the brief's target (mon): VS decoupling beside the INA226",
+      "R1 -> (16.00, 16.00) rot 0 : rung 3 block anchor at the brief's target (mon): shunt on the straight VBUS line between the two receptacles, in-side pad left",
+      "R2 -> (20.75, 9.35) rot 90 : rung 3 block anchor at the brief's target (mon): SDA pull-up beside the INA226",
+      "R3 -> (23.10, 6.35) rot 90 : rung 3 block anchor at the brief's target (mon): SCL pull-up beside the INA226"
+    ],
+    "ran": true,
+    "seconds": 0.0
+  },
+  "route": {
+    "before": 41,
+    "after": 0,
+    "open_by_net": {},
+    "fixes": [],
+    "passes": [
+      [
+        1,
+        7
+      ],
+      [
+        2,
+        4
+      ],
+      [
+        3,
+        2
+      ],
+      [
+        4,
+        0
+      ],
+      [
+        5,
+        0
+      ]
+    ],
+    "stats": {
+      "tracks": 152,
+      "vias": 11,
+      "length_mm": 331.3,
+      "length_by_layer_mm": {
+        "B.Cu": 62.9,
+        "F.Cu": 268.4
+      }
+    },
+    "layers": [
+      [
+        "F.Cu",
+        "signal"
+      ],
+      [
+        "B.Cu",
+        "signal"
+      ]
+    ],
+    "ladder": [
+      {
+        "rung": 1,
+        "tag": "1_fanout",
+        "classes": {},
+        "fanout": true,
+        "export": {
+          "poursWithheld": 0,
+          "keepoutsMirrored": 0,
+          "clearanceBumpedTo_mm": null,
+          "powerLayers": [],
+          "rewritten": [],
+          "pinShapesOnPlanesDropped": 0,
+          "planes": 0,
+          "canonical": {
+            "images": 7,
+            "renamed": 2,
+            "nets": 15
+          },
+          "viaViaClearance_mm": null
+        },
+        "seconds": 9.5,
+        "ok": true,
+        "log": {
+          "nets": {
+            "VBUS_IN": 3,
+            "VBUS_OUT": 4
+          },
+          "timedOut": false,
+          "noProgress": true,
+          "last_unrouted": 7,
+          "read": true
+        },
+        "widths": {
+          "snapped": 0,
+          "widened": 14,
+          "kept_narrow": 0,
+          "raised_to_min": 0,
+          "below_min_deleted": 0
+        },
+        "shorts_deleted": 0,
+        "keepout_deleted": 0,
+        "drc": {
+          "ran": true,
+          "electrical": 0,
+          "unconnected": 7,
+          "score": 7,
+          "types": {},
+          "shorts": 0,
+          "keepout": 0
+        },
+        "open": 7,
+        "last_mile": {
+          "ok": true,
+          "openBefore": 7,
+          "openAfterModel": 7,
+          "closed": 0,
+          "tracks": 0,
+          "vias": 0,
+          "deadlineHit": false,
+          "limitations": [],
+          "seconds": 0.15,
+          "connections": [
+            {
+              "net": "VBUS_OUT",
+              "from": "R1.2",
+              "to": "U1.8",
+              "outcome": "blocked_terminal"
+            },
+            {
+              "net": "VBUS_OUT",
+              "from": "U1.8",
+              "to": "U1.9",
+              "outcome": "blocked_terminal"
+            },
+            {
+              "net": "VBUS_OUT",
+              "from": "U1.9",
+              "to": "U1.8",
+              "outcome": "blocked_terminal"
+            },
+            {
+              "net": "VBUS_OUT",
+              "from": "J2.A4",
+              "to": "J2.A9",
+              "outcome": "blocked_terminal"
+            },
+            {
+              "net": "VBUS_IN",
+              "from": "R1.1",
+              "to": "J1.A9",
+              "outcome": "blocked_terminal"
+            },
+            {
+              "net": "VBUS_IN",
+              "from": "U1.10",
+              "to": "R1.1",
+              "outcome": "blocked_terminal"
+            },
+            {
+              "net": "VBUS_IN",
+              "from": "J1.A4",
+              "to": "J1.A9",
+              "outcome": "blocked_terminal"
+            }
+          ],
+          "accepted": false
+        },
+        "open_by_net": {
+          "VBUS_IN": 3,
+          "VBUS_OUT": 4
+        },
+        "stats": {
+          "tracks": 120,
+          "vias": 9,
+          "length_mm": 255.8,
+          "length_by_layer_mm": {
+            "B.Cu": 66.9,
+            "F.Cu": 188.8
+          }
+        }
+      },
+      {
+        "rung": 1,
+        "tag": "1_nofanout",
+        "classes": {},
+        "fanout": false,
+        "export": {
+          "poursWithheld": 0,
+          "keepoutsMirrored": 0,
+          "clearanceBumpedTo_mm": null,
+          "powerLayers": [],
+          "rewritten": [],
+          "pinShapesOnPlanesDropped": 0,
+          "planes": 0,
+          "canonical": {
+            "images": 7,
+            "renamed": 2,
+            "nets": 15
+          },
+          "viaViaClearance_mm": null
+        },
+        "seconds": 7.8,
+        "ok": true,
+        "log": {
+          "nets": {
+            "VBUS_IN": 3,
+            "VBUS_OUT": 4
+          },
+          "timedOut": false,
+          "noProgress": true,
+          "last_unrouted": 7,
+          "read": true
+        },
+        "widths": {
+          "snapped": 0,
+          "widened": 0,
+          "kept_narrow": 0,
+          "raised_to_min": 0,
+          "below_min_deleted": 0
+        },
+        "shorts_deleted": 0,
+        "keepout_deleted": 0,
+        "drc": {
+          "ran": true,
+          "electrical": 0,
+          "unconnected": 7,
+          "score": 7,
+          "types": {},
+          "shorts": 0,
+          "keepout": 0
+        },
+        "open": 7,
+        "last_mile": {
+          "ok": true,
+          "openBefore": 7,
+          "openAfterModel": 7,
+          "closed": 0,
+          "tracks": 0,
+          "vias": 0,
+          "deadlineHit": false,
+          "limitations": [],
+          "seconds": 0.15,
+          "connections": [
+            {
+              "net": "VBUS_OUT",
+              "from": "R1.2",
+              "to": "U1.8",
+              "outcome": "blocked_terminal"
+            },
+            {
+              "net": "VBUS_OUT",
+              "from": "U1.8",
+              "to": "U1.9",
+              "outcome": "blocked_terminal"
+            },
+            {
+              "net": "VBUS_OUT",
+              "from": "U1.9",
+              "to": "U1.8",
+              "outcome": "blocked_terminal"
+            },
+            {
+              "net": "VBUS_OUT",
+              "from": "J2.A4",
+              "to": "J2.A9",
+              "outcome": "blocked_terminal"
+            },
+            {
+              "net": "VBUS_IN",
+              "from": "R1.1",
+              "to": "J1.A9",
+              "outcome": "blocked_terminal"
+            },
+            {
+              "net": "VBUS_IN",
+              "from": "U1.10",
+              "to": "R1.1",
+              "outcome": "blocked_terminal"
+            },
+            {
+              "net": "VBUS_IN",
+              "from": "J1.A4",
+              "to": "J1.A9",
+              "outcome": "blocked_terminal"
+            }
+          ],
+          "accepted": false
+        },
+        "open_by_net": {
+          "VBUS_IN": 3,
+          "VBUS_OUT": 4
+        },
+        "stats": {
+          "tracks": 118,
+          "vias": 4,
+          "length_mm": 285.4,
+          "length_by_layer_mm": {
+            "B.Cu": 37.3,
+            "F.Cu": 248.1
+          }
+        }
+      },
+      {
+        "rung": 2,
+        "tag": "2_narrow",
+        "classes": {
+          "PWR": 0.2
+        },
+        "fanout": true,
+        "export": {
+          "poursWithheld": 0,
+          "keepoutsMirrored": 0,
+          "clearanceBumpedTo_mm": null,
+          "powerLayers": [],
+          "rewritten": [],
+          "pinShapesOnPlanesDropped": 0,
+          "planes": 0,
+          "canonical": {
+            "images": 7,
+            "renamed": 2,
+            "nets": 15
+          },
+          "viaViaClearance_mm": null
+        },
+        "seconds": 6.8,
+        "ok": true,
+        "log": {
+          "nets": {},
+          "timedOut": false,
+          "noProgress": false,
+          "last_unrouted": 0,
+          "read": true
+        },
+        "widths": {
+          "snapped": 0,
+          "widened": 0,
+          "kept_narrow": 0,
+          "raised_to_min": 0,
+          "below_min_deleted": 0
+        },
+        "shorts_deleted": 0,
+        "keepout_deleted": 0,
+        "drc": {
+          "ran": true,
+          "electrical": 0,
+          "unconnected": 0,
+          "score": 0,
+          "types": {},
+          "shorts": 0,
+          "keepout": 0
+        },
+        "open": 0,
+        "open_by_net": {},
+        "stats": {
+          "tracks": 152,
+          "vias": 11,
+          "length_mm": 331.3,
+          "length_by_layer_mm": {
+            "B.Cu": 62.9,
+            "F.Cu": 268.4
+          }
+        }
+      }
+    ],
+    "kept_rung": "2_narrow",
+    "classes_routed": {
+      "PWR": 0.2
+    },
+    "fanout_kept": true,
+    "fanout_compare": {
+      "1_fanout": {
+        "open": 7,
+        "score": 7,
+        "vias": 9,
+        "seconds": 9.5
+      },
+      "1_nofanout": {
+        "open": 7,
+        "score": 7,
+        "vias": 4,
+        "seconds": 7.8
+      }
+    },
+    "pad_vias": [],
+    "timedOut": false,
+    "noProgress": false,
+    "ran": true,
+    "seconds": 28.3
+  },
+  "pour": {
+    "plan": [
+      {
+        "layer": "F.Cu",
+        "net": "GND",
+        "priority": 0
+      },
+      {
+        "layer": "B.Cu",
+        "net": "GND",
+        "priority": 0
+      }
+    ],
+    "open_before": 0,
+    "open_after_pour": 0,
+    "stitch_vias": 12,
+    "open_after_stitch": 0,
+    "island_repair_vias": 0,
+    "open_final": 0,
+    "zones": [
+      {
+        "name": "vbus_in",
+        "net": "VBUS_IN",
+        "layers": [
+          "F.Cu",
+          "B.Cu"
+        ],
+        "stitch_vias": 6
+      },
+      {
+        "name": "vbus_out",
+        "net": "VBUS_OUT",
+        "layers": [
+          "F.Cu",
+          "B.Cu"
+        ],
+        "stitch_vias": 6
+      }
+    ],
+    "stats": {
+      "tracks": 152,
+      "vias": 35,
+      "length_mm": 331.3,
+      "length_by_layer_mm": {
+        "B.Cu": 62.9,
+        "F.Cu": 268.4
+      }
+    },
+    "ran": true,
+    "seconds": 0.5
+  },
+  "silk": {
+    "silk_clipped": 6,
+    "footprint_strokes_widened": 25,
+    "pin_labels": 0,
+    "silk_refused": [],
+    "words": 3,
+    "refs_seated": 4,
+    "refs_hidden": 1,
+    "title_offset_mm": [
+      0.0,
+      -13.0
+    ],
+    "title_lines": 2,
+    "stitch_vias_displaced": 3,
+    "ran": true,
+    "seconds": 0.2
+  },
+  "drc": {
+    "ran": true,
+    "state": "fresh",
+    "board_sha": "569a4d76fb72618d4d8b34c31a214bd456570f40b64fdc8862eab1e7255055eb",
+    "errors": 0,
+    "warnings": 2,
+    "unconnected": 0,
+    "parity": 0,
+    "error_types": {},
+    "warning_types": {
+      "lib_footprint_mismatch": 2
+    },
+    "repairs": [],
+    "seconds": 1.2
+  },
+  "dfm": {
+    "ran": true,
+    "profile": "jlcpcb_2layer",
+    "copper_layers": 2,
+    "errors": 0,
+    "warnings": 0,
+    "rows": []
+  },
+  "fab": {
+    "gerbers": [
+      "power_usb_meter-B_Cu.gbl",
+      "power_usb_meter-B_Mask.gbs",
+      "power_usb_meter-B_Paste.gbp",
+      "power_usb_meter-B_Silkscreen.gbo",
+      "power_usb_meter-Edge_Cuts.gm1",
+      "power_usb_meter-F_Cu.gtl",
+      "power_usb_meter-F_Mask.gts",
+      "power_usb_meter-F_Paste.gtp",
+      "power_usb_meter-F_Silkscreen.gto",
+      "power_usb_meter-job.gbrjob"
+    ],
+    "copper_layers": 2,
+    "copper_gerbers": [
+      "power_usb_meter-F_Cu.gtl",
+      "power_usb_meter-B_Cu.gbl"
+    ],
+    "gerber_job": {
+      "file": "power_usb_meter-job.gbrjob",
+      "layer_number": 2,
+      "board_thickness_mm": 1.6,
+      "copper_files": [
+        "power_usb_meter-F_Cu.gtl",
+        "power_usb_meter-B_Cu.gbl"
+      ],
+      "copper_mm": [
+        0.035,
+        0.035
+      ],
+      "dielectric_mm": [
+        1.51
+      ],
+      "dielectric": [
+        "FR4"
+      ]
+    },
+    "drill": [
+      "power_usb_meter.drl",
+      "power_usb_meter-drl_map.gbr"
+    ],
+    "zip": "power_usb_meter_gerbers.zip",
+    "pos": "power_usb_meter_pos.csv",
+    "cpl": "power_usb_meter_cpl_jlc.csv",
+    "cpl_fit": {
+      "rows": 8,
+      "fitted": 8,
+      "table": [],
+      "pin_to_pad_max_mm": 0.072,
+      "lands": {
+        "fetched": 0
+      },
+      "parts": {
+        "C1": {
+          "source": "fitted",
+          "lcsc": "C28233",
+          "turn": 0,
+          "rms_mm": 0.05,
+          "next_mm": 1.3793,
+          "pin_to_pad_max_mm": 0.05
+        },
+        "J1": {
+          "source": "fitted",
+          "lcsc": "C165948",
+          "turn": 0,
+          "rms_mm": 0.0001,
+          "next_mm": 1.6202,
+          "pin_to_pad_max_mm": 0.0
+        },
+        "J2": {
+          "source": "fitted",
+          "lcsc": "C165948",
+          "turn": 0,
+          "rms_mm": 0.0001,
+          "next_mm": 1.6202,
+          "pin_to_pad_max_mm": 0.0
+        },
+        "J3": {
+          "source": "fitted",
+          "lcsc": "C160404",
+          "turn": 0,
+          "rms_mm": 0.0003,
+          "next_mm": 1.5811,
+          "pin_to_pad_max_mm": 0.0
+        },
+        "R1": {
+          "source": "fitted",
+          "lcsc": "C105362",
+          "turn": 0,
+          "rms_mm": 0.0163,
+          "next_mm": 2.0798,
+          "pin_to_pad_max_mm": 0.016
+        },
+        "R2": {
+          "source": "fitted",
+          "lcsc": "C23162",
+          "turn": 0,
+          "rms_mm": 0.0716,
+          "next_mm": 1.1172,
+          "pin_to_pad_max_mm": 0.072
+        },
+        "R3": {
+          "source": "fitted",
+          "lcsc": "C23162",
+          "turn": 0,
+          "rms_mm": 0.0716,
+          "next_mm": 1.1172,
+          "pin_to_pad_max_mm": 0.072
+        },
+        "U1": {
+          "source": "fitted",
+          "lcsc": "C49851",
+          "turn": 270,
+          "rms_mm": 0.04,
+          "next_mm": 3.1741,
+          "pin_to_pad_max_mm": 0.04
+        }
+      }
+    },
+    "bom": "power_usb_meter_bom.csv",
+    "schematic_pdf": "power_usb_meter_schematic.pdf",
+    "step": "power_usb_meter.step",
+    "ready": true,
+    "blockers": [],
+    "drc_state": "fresh",
+    "ran": true,
+    "seconds": 1.6
+  },
+  "view3d": {
+    "frames": 63,
+    "ran": true,
+    "seconds": 0.0
+  },
+  "render": {
+    "ran": true,
+    "seconds": 129.7
+  },
+  "video": {
+    "ran": true,
+    "seconds": 10.6
+  }
+}

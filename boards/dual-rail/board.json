@@ -1,0 +1,708 @@
+{
+  "name": "power_dual_buck",
+  "title": "HeyPCB Dual Rail - 6-15 V in, 5 V / 3 A and 3.3 V / 2 A out",
+  "revision": "A",
+  "brief": "Dual-rail buck module for the bench and for projects: 6-15 V DC enters on a 5 mm screw terminal behind a reverse-polarity P-FET (10 V gate clamp) and an SMAJ15A TVS; a TPS563201 makes 5 V / 3 A and an AP63203 makes 3.3 V / 2 A, both straight from the protected input; a green LED on each rail; VIN, 5V, 3V3 and GND on a 2.54 mm header; four M3 holes; 50 x 36 mm, 4 layers.",
+  "blocks": [
+    {
+      "block": "vin_protect_15v",
+      "as": "vin",
+      "title": "6-15 V input: reverse-polarity P-FET, TVS, bulk",
+      "nets": {
+        "VIN_RAW": "VIN_RAW"
+      }
+    },
+    {
+      "block": "whisker_buck_5v",
+      "as": "buck5",
+      "title": "5 V / 3 A buck (TPS563201)",
+      "nets": {
+        "VBUCK": "VIN",
+        "SW": "SW5"
+      }
+    },
+    {
+      "block": "pdb_buck_3v3_ap63203",
+      "as": "buck3",
+      "title": "3.3 V / 2 A buck (AP63203)",
+      "nets": {
+        "VBUS": "VIN",
+        "BUCK_SW": "SW3"
+      }
+    },
+    {
+      "block": "led_indicator",
+      "as": "led5",
+      "title": "5 V rail LED",
+      "nets": {
+        "3V3": "5V"
+      },
+      "values": {
+        "D?": "Green (5V)",
+        "R?": "2.2k"
+      }
+    },
+    {
+      "block": "led_indicator",
+      "as": "led3",
+      "title": "3.3 V rail LED",
+      "values": {
+        "D?": "Green (3V3)",
+        "R?": "1k"
+      }
+    },
+    {
+      "block": "probe_header_1x04",
+      "as": "out",
+      "title": "Output header",
+      "values": {
+        "J?": "OUT"
+      },
+      "pinNets": {
+        "J?.1": "VIN",
+        "J?.2": "5V",
+        "J?.3": "3V3",
+        "J?.4": "GND"
+      },
+      "silk": [
+        "VIN",
+        "5V",
+        "3V3",
+        "GND"
+      ]
+    },
+    {
+      "block": "pdb_mounting_holes_m3",
+      "as": "holes",
+      "title": "Four M3 mounting holes"
+    }
+  ],
+  "pwrFlags": [
+    "GND",
+    "VIN",
+    "3V3"
+  ],
+  "netClasses": [
+    {
+      "name": "PWR_HI",
+      "nets": [
+        "VIN_RAW",
+        "VIN",
+        "5V",
+        "SW5"
+      ],
+      "track": 1.5,
+      "clearance": 0.2,
+      "via": [
+        0.8,
+        0.4
+      ],
+      "why": "up to 3 A on 5V and on the TPS563201's switch node, about 2 A on the input at 6 V: IPC-2221 gives about 1.4 mm on a 1 oz outer layer for 3 A at a 10 C rise. The raw input and the switch node are named in the brief (block nets are otherwise prefixed with the block's lead ref, and a class naming them would match nothing: measured on rev A's first build, where both routed at 0.2 mm)."
+    },
+    {
+      "name": "PWR_3V3",
+      "nets": [
+        "3V3",
+        "SW3"
+      ],
+      "track": 1.0,
+      "clearance": 0.2,
+      "via": [
+        0.8,
+        0.4
+      ],
+      "why": "2 A from the AP63203 and on its switch node: about 0.8 mm on a 1 oz outer layer at a 10 C rise"
+    }
+  ],
+  "board": {
+    "width": 50.0,
+    "height": 36.0,
+    "corner_radius": 2.0,
+    "layers": 4,
+    "origin": [
+      100.0,
+      100.0
+    ],
+    "rules": {
+      "clearance": 0.2,
+      "track": 0.2,
+      "via": [
+        0.6,
+        0.3
+      ],
+      "edge_clearance": 0.5,
+      "hole_to_hole": 0.5,
+      "min_through_hole": 0.3,
+      "min_track": 0.15,
+      "why_min_track": "Freerouting may neck a power track into a SOT-23-6 pin; JLCPCB multilayer builds 0.09 mm"
+    },
+    "planes": {
+      "In1.Cu": "GND"
+    },
+    "notes": "4 layers: F.Cu / In1 GND plane / In2 routing / B.Cu. In1 is a Specctra power layer during routing; every leftover area is poured GND after routing.",
+    "zones": [
+      {
+        "name": "vin_raw",
+        "net": "VIN_RAW",
+        "layers": [
+          "F.Cu"
+        ],
+        "priority": 1,
+        "rect": [
+          3.0,
+          18.4,
+          14.9,
+          21.0
+        ],
+        "why": "terminal + pin to the FET's drain: the whole input current"
+      },
+      {
+        "name": "vin_in",
+        "net": "VIN",
+        "layers": [
+          "F.Cu",
+          "In2.Cu"
+        ],
+        "priority": 2,
+        "polygon": [
+          [
+            14.2,
+            14.8
+          ],
+          [
+            24.0,
+            14.8
+          ],
+          [
+            24.0,
+            22.0
+          ],
+          [
+            21.8,
+            22.0
+          ],
+          [
+            21.8,
+            25.0
+          ],
+          [
+            15.6,
+            25.0
+          ],
+          [
+            15.6,
+            22.4
+          ],
+          [
+            14.2,
+            22.4
+          ]
+        ],
+        "why": "FET source to the input bulk and TVS, stitched into In2's VIN plane, which carries VIN to both converters",
+        "stitch": 1.2,
+        "via": [
+          0.6,
+          0.3
+        ]
+      },
+      {
+        "name": "sw5",
+        "net": "SW5",
+        "layers": [
+          "F.Cu"
+        ],
+        "priority": 3,
+        "rect": [
+          22.0,
+          8.4,
+          26.6,
+          9.6
+        ],
+        "why": "TPS563201 SW pin to the inductor: 3 A peak"
+      },
+      {
+        "name": "out5",
+        "net": "5V",
+        "layers": [
+          "F.Cu"
+        ],
+        "priority": 4,
+        "polygon": [
+          [
+            29.2,
+            4.6
+          ],
+          [
+            36.0,
+            4.6
+          ],
+          [
+            36.0,
+            15.6
+          ],
+          [
+            49.2,
+            15.6
+          ],
+          [
+            49.2,
+            17.9
+          ],
+          [
+            34.4,
+            17.9
+          ],
+          [
+            34.4,
+            13.6
+          ],
+          [
+            29.2,
+            13.6
+          ]
+        ],
+        "why": "inductor output, the three output caps and the header's 5V pin"
+      },
+      {
+        "name": "sw3",
+        "net": "SW3",
+        "layers": [
+          "F.Cu"
+        ],
+        "priority": 5,
+        "rect": [
+          25.5,
+          26.4,
+          29.2,
+          27.6
+        ],
+        "why": "AP63203 SW pin to the inductor: 2 A"
+      },
+      {
+        "name": "out3",
+        "net": "3V3",
+        "layers": [
+          "F.Cu"
+        ],
+        "priority": 6,
+        "polygon": [
+          [
+            30.8,
+            22.6
+          ],
+          [
+            36.4,
+            22.6
+          ],
+          [
+            36.4,
+            18.5
+          ],
+          [
+            49.2,
+            18.5
+          ],
+          [
+            49.2,
+            20.1
+          ],
+          [
+            37.8,
+            20.1
+          ],
+          [
+            37.8,
+            31.2
+          ],
+          [
+            30.8,
+            31.2
+          ]
+        ],
+        "why": "inductor output, the two output caps and the header's 3V3 pin"
+      },
+      {
+        "name": "vin5",
+        "net": "VIN",
+        "layers": [
+          "F.Cu",
+          "In2.Cu"
+        ],
+        "stitch": 1.2,
+        "via": [
+          0.6,
+          0.3
+        ],
+        "priority": 7,
+        "polygon": [
+          [
+            17.4,
+            5.3
+          ],
+          [
+            23.8,
+            5.3
+          ],
+          [
+            23.8,
+            2.6
+          ],
+          [
+            28.4,
+            2.6
+          ],
+          [
+            28.4,
+            5.1
+          ],
+          [
+            24.6,
+            5.1
+          ],
+          [
+            24.6,
+            8.45
+          ],
+          [
+            17.4,
+            8.45
+          ]
+        ],
+        "why": "the TPS563201's VIN pin and its three input caps on one copper area, reaching up over the inductor where stitch vias to In2's VIN plane fit (the area at the pin is all courtyards)"
+      },
+      {
+        "name": "vin3",
+        "net": "VIN",
+        "layers": [
+          "F.Cu",
+          "In2.Cu"
+        ],
+        "stitch": 1.2,
+        "via": [
+          0.6,
+          0.3
+        ],
+        "priority": 8,
+        "polygon": [
+          [
+            21.4,
+            27.4
+          ],
+          [
+            24.2,
+            27.4
+          ],
+          [
+            24.2,
+            31.2
+          ],
+          [
+            21.4,
+            31.2
+          ]
+        ],
+        "why": "the AP63203's IN pin and its input cap on one copper area, stitched to In2's VIN plane"
+      }
+    ]
+  },
+  "placement": {
+    "vin:J?": {
+      "edge": "left",
+      "y": 0.0,
+      "overhang": 0.0,
+      "why": "supply wires enter the left edge, between the two left M3 holes"
+    },
+    "out:J?": {
+      "lock": [
+        22.5,
+        14.19
+      ],
+      "rot": 0,
+      "why": "output header along the right edge, pin 1 (VIN) at the top, centred on the board"
+    },
+    "holes:H1?": {
+      "at": [
+        3.5,
+        3.5
+      ],
+      "why": "M3, top-left corner"
+    },
+    "holes:H2?": {
+      "at": [
+        46.5,
+        3.5
+      ],
+      "why": "M3, top-right corner"
+    },
+    "holes:H3?": {
+      "at": [
+        3.5,
+        32.5
+      ],
+      "why": "M3, bottom-left corner"
+    },
+    "holes:H4?": {
+      "at": [
+        46.5,
+        32.5
+      ],
+      "why": "M3, bottom-right corner"
+    },
+    "vin:Q?": {
+      "at": [
+        13.5,
+        20.2
+      ],
+      "rot": 90,
+      "why": "drain level with the terminal's + pin, 1.25 mm clear of the terminal body; source toward the bulk"
+    },
+    "vin:D1?": {
+      "at": [
+        13.5,
+        24.4
+      ],
+      "rot": 0,
+      "why": "gate zener below the FET"
+    },
+    "vin:R?": {
+      "at": [
+        13.5,
+        26.8
+      ],
+      "rot": 0,
+      "why": "gate pull-down below the zener"
+    },
+    "vin:C1?": {
+      "at": [
+        19.2,
+        21.0
+      ],
+      "rot": 0,
+      "why": "input bulk beside the FET's source"
+    },
+    "vin:C2?": {
+      "at": [
+        19.2,
+        23.6
+      ],
+      "rot": 0,
+      "why": "input bulk beside the FET's source"
+    },
+    "vin:D2?": {
+      "at": [
+        20.2,
+        16.4
+      ],
+      "rot": 0,
+      "why": "TVS on the protected input, above the bulk"
+    },
+    "buck5:U?": {
+      "at": [
+        21.0,
+        9.0
+      ],
+      "rot": 180,
+      "why": "turned so GND / SW / VIN (TPS563201 pins 1-3, one side) face the inductor on the right"
+    },
+    "buck5:L?": {
+      "at": [
+        28.0,
+        9.0
+      ],
+      "rot": 0,
+      "why": "inductor straight out from the SW pin: about 3.6 mm of switch node"
+    },
+    "buck5:C3?": {
+      "at": [
+        22.8,
+        5.0
+      ],
+      "rot": 90,
+      "why": "100 nF input cap closest to the VIN pin"
+    },
+    "buck5:C1?": {
+      "at": [
+        20.6,
+        5.0
+      ],
+      "rot": 90,
+      "why": "22 uF input cap beside the VIN pin"
+    },
+    "buck5:C2?": {
+      "at": [
+        18.6,
+        5.0
+      ],
+      "rot": 90,
+      "why": "22 uF input cap beside the VIN pin"
+    },
+    "buck5:R3?": {
+      "at": [
+        16.2,
+        5.0
+      ],
+      "rot": 90,
+      "why": "EN pull-up to VIN"
+    },
+    "buck5:R1?": {
+      "at": [
+        16.2,
+        8.6
+      ],
+      "rot": 90,
+      "why": "feedback divider top, by VFB, away from the switch node"
+    },
+    "buck5:R2?": {
+      "at": [
+        16.2,
+        11.6
+      ],
+      "rot": 90,
+      "why": "feedback divider bottom"
+    },
+    "buck5:C4?": {
+      "at": [
+        21.0,
+        12.4
+      ],
+      "rot": 0,
+      "why": "bootstrap cap between VBST and SW"
+    },
+    "buck5:C5?": {
+      "at": [
+        34.2,
+        6.2
+      ],
+      "rot": 0,
+      "why": "5 V output cap at the inductor's output"
+    },
+    "buck5:C6?": {
+      "at": [
+        34.2,
+        9.0
+      ],
+      "rot": 0,
+      "why": "5 V output cap at the inductor's output"
+    },
+    "buck5:C7?": {
+      "at": [
+        34.2,
+        11.8
+      ],
+      "rot": 0,
+      "why": "5 V output cap at the inductor's output"
+    },
+    "buck3:U?": {
+      "at": [
+        24.5,
+        27.0
+      ],
+      "rot": 0,
+      "why": "AP63203 with IN and GND on its bottom corners and SW on the right"
+    },
+    "buck3:L?": {
+      "at": [
+        30.0,
+        27.0
+      ],
+      "rot": 0,
+      "why": "inductor straight out from the SW pin: about 2.4 mm of switch node"
+    },
+    "buck3:C1?": {
+      "at": [
+        24.5,
+        30.0
+      ],
+      "rot": 0,
+      "why": "10 uF input cap bridging IN and GND directly under the converter"
+    },
+    "buck3:C2?": {
+      "at": [
+        25.4,
+        23.8
+      ],
+      "rot": 0,
+      "why": "bootstrap cap between BST and SW"
+    },
+    "buck3:C3?": {
+      "at": [
+        34.6,
+        24.8
+      ],
+      "rot": 90,
+      "why": "3.3 V output cap at the inductor's output"
+    },
+    "buck3:C4?": {
+      "at": [
+        34.6,
+        29.0
+      ],
+      "rot": 90,
+      "why": "3.3 V output cap at the inductor's output"
+    },
+    "led5:R?": {
+      "at": [
+        36.5,
+        3.4
+      ],
+      "why": "5 V LED near the top edge, clear of the top-right M3 hole"
+    },
+    "led3:R?": {
+      "at": [
+        36.5,
+        33.0
+      ],
+      "why": "3.3 V LED near the bottom edge, clear of the bottom-right M3 hole"
+    }
+  },
+  "route": {
+    "passes": 30,
+    "fanout": true,
+    "solve_s": 300,
+    "why": "the esp32s3_lipo ladder: narrow the classes that carry an open net straight to 0.2 mm; the outline is stated, so it is never grown"
+  },
+  "stitch_pitch": 5.0,
+  "silk": {
+    "words": {
+      "led5:D?": "5V",
+      "led3:D?": "3V3",
+      "vin:J?": "6-15V IN"
+    },
+    "title": [
+      {
+        "text": "HeyPCB Dual Rail",
+        "y": 15.0,
+        "size": 1.5,
+        "bold": true
+      },
+      {
+        "text": "6-15 V in / 5 V 3 A / 3.3 V 2 A",
+        "y": 17.6,
+        "size": 0.8
+      },
+      {
+        "text": "rev {revision}  heypcb-kicad",
+        "y": 19.8,
+        "size": 0.8
+      }
+    ],
+    "switches": [
+      {
+        "part": "vin:J?",
+        "pads": [
+          "1",
+          "2"
+        ],
+        "words": {
+          "GND": "-"
+        },
+        "else": "+",
+        "why": "+ beside the terminal pin that takes the supply's positive lead, - beside GND (a polarity triangle alone is ambiguous on a power input)"
+      }
+    ]
+  },
+  "captions": {
+    "place_3d": "KiCad's raytracer on the placed board: the input terminal on the left edge, the 5 V buck above the 3.3 V buck, the output header on the right edge.",
+    "done_3d": "6-15 V in, reverse-polarity FET + TVS, TPS563201 5 V / 3 A, AP63203 3.3 V / 2 A, two rail LEDs, VIN/5V/3V3/GND header."
+  }
+}

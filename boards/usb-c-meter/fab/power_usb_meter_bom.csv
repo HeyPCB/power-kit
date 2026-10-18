@@ -1,0 +1,8 @@
+"Reference","Value","Footprint","MPN","LCSC","Qty"
+"C1","100nF","Capacitor_SMD:C_0805_2012Metric","CL21B104KCFNNNE","C28233","1"
+"J1","USB-C IN","Connector_USB:USB_C_Receptacle_HRO_TYPE-C-31-M-12","TYPE-C-31-M-12","C165948","1"
+"J2","USB-C OUT","Connector_USB:USB_C_Receptacle_HRO_TYPE-C-31-M-12","TYPE-C-31-M-12","C165948","1"
+"J3","QWIIC","Connector_JST:JST_SH_SM04B-SRSS-TB_1x04-1MP_P1.00mm_Horizontal","SM04B-SRSS-TB(LF)(SN)","C160404","1"
+"R1","10m","Resistor_SMD:R_1206_3216Metric","FMF06FTHR010-LH","C105362","1"
+"R2,R3","4.7k","Resistor_SMD:R_0603_1608Metric","0603WAF4701T5E","C23162","2"
+"U1","INA226","Package_SO:TSSOP-10_3x3mm_P0.5mm","INA226AIDGSR","C49851","1"

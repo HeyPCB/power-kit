@@ -1,0 +1,51 @@
+{
+  "version": 1,
+  "project": {
+    "title": "HeyPCB Power Kit",
+    "summary": "Six open power and charging boards from HeyPCB: buck module, USB-C PD trigger, 1S boost, USB/battery power mux, USB eFuse and a USB-C power meter. KiCad 10, JLCPCB-ready, CERN-OHL-S-2.0."
+  },
+  "boards": [
+    {
+      "slug": "dual-rail",
+      "path": "boards/dual-rail",
+      "title": "HeyPCB Dual Rail",
+      "role": "6-15 V to 5 V / 3 A + 3.3 V / 2 A",
+      "summary": "A dual-rail buck module: 6-15 V in, 5 V / 3 A and 3.3 V / 2 A out, reverse-polarity protected. 50 x 36 mm, 4 layers, KiCad 10. Not yet fabricated."
+    },
+    {
+      "slug": "pd-trigger",
+      "path": "boards/pd-trigger",
+      "title": "HeyPCB PD Trigger",
+      "role": "USB-C PD sink, DIP-selected 5-20 V",
+      "summary": "A USB-C Power Delivery trigger: any PD charger in, a fixed 5, 9, 12, 15 or 20 V at 3 A out on a screw terminal, picked with a DIP switch. 28 x 40 mm, 2 layers, KiCad 10. Not yet fabricated."
+    },
+    {
+      "slug": "boost-1s",
+      "path": "boards/boost-1s",
+      "title": "HeyPCB 1S Boost",
+      "role": "One lithium cell to 5.1 V",
+      "summary": "One lithium cell in, 5.1 V out: an MT3608 boost with a JST PH input and a 2.54 mm header. 28 x 30 mm, 2 layers, KiCad 10. Not yet fabricated."
+    },
+    {
+      "slug": "power-mux",
+      "path": "boards/power-mux",
+      "title": "HeyPCB Power Mux",
+      "role": "USB-C first, 1S cell as backup",
+      "summary": "USB-C first, a lithium cell as backup: a TPS2116 ideal-diode power mux with no diode drop and a pin that says which source is live. 28 x 32 mm, 2 layers, KiCad 10. Not yet fabricated."
+    },
+    {
+      "slug": "usb-efuse",
+      "path": "boards/usb-efuse",
+      "title": "HeyPCB USB eFuse",
+      "role": "5 V inline protection",
+      "summary": "A 5 V eFuse between a USB-C supply and your project: about 2 A current limit, output clamped at 6.1 V, rides out a 20 V input, soft start and auto-retry. 26 x 30 mm, 2 layers, KiCad 10. Not yet fabricated."
+    },
+    {
+      "slug": "usb-c-meter",
+      "path": "boards/usb-c-meter",
+      "title": "HeyPCB USB-C Power Meter",
+      "role": "Inline power monitor, Qwiic",
+      "summary": "Put it in a USB-C cable run and read volts, amps and watts over Qwiic: an INA226 on a 10 mOhm shunt in VBUS, with CC and USB 2.0 passed straight through. 32 x 24 mm, 2 layers, KiCad 10. Not yet fabricated."
+    }
+  ]
+}

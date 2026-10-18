@@ -1,0 +1,292 @@
+{
+  "name": "power_pd_trigger",
+  "title": "HeyPCB PD Trigger - USB-C PD sink, DIP-selected 5/9/12/15/20 V at 3 A",
+  "revision": "A",
+  "brief": "USB-C Power Delivery trigger: a HUSB238 negotiates a fixed voltage from any PD charger and closes a DMP3013SFV P-FET onto a screw terminal; a 4-way DIP switch selects 5, 9, 12 or 15 V (all off: 20 V), the request is 3.0 A; an SMBJ24A TVS and a green LED on the output; 28 x 40 mm, 2 layers.",
+  "blocks": [
+    {
+      "block": "usbc_pd_in",
+      "as": "usb",
+      "title": "USB-C PD input",
+      "nets": {
+        "CC1": "CC1",
+        "CC2": "CC2",
+        "USB_DP": "USB_DP",
+        "USB_DM": "USB_DM"
+      }
+    },
+    {
+      "block": "pd_sink_husb238",
+      "as": "pd",
+      "title": "HUSB238 PD sink, DIP voltage select, P-FET output switch",
+      "nets": {
+        "CC1": "CC1",
+        "CC2": "CC2",
+        "USB_DP": "USB_DP",
+        "USB_DM": "USB_DM"
+      },
+      "silk_part": "SW?",
+      "silk": [
+        "5V",
+        "9V",
+        "12V",
+        "15V"
+      ]
+    },
+    {
+      "block": "out_terminal_mx126",
+      "as": "out",
+      "title": "Output terminal + TVS",
+      "nets": {
+        "OUT_P": "VOUT"
+      }
+    },
+    {
+      "block": "led_indicator",
+      "as": "led",
+      "title": "Output LED",
+      "nets": {
+        "3V3": "VOUT"
+      },
+      "values": {
+        "D?": "Green (OUT)",
+        "R?": "10k"
+      }
+    }
+  ],
+  "pwrFlags": [
+    "GND",
+    "VBUS",
+    "VOUT"
+  ],
+  "netClasses": [
+    {
+      "name": "PWR",
+      "nets": [
+        "VBUS",
+        "VOUT"
+      ],
+      "track": 0.5,
+      "clearance": 0.2,
+      "via": [
+        0.6,
+        0.3
+      ],
+      "why": "0.5 mm enters the PowerDI3333's 0.4 mm source leads and the receptacle's VBUS pins; the 3 A path itself is carried in board.zones"
+    }
+  ],
+  "board": {
+    "width": 28.0,
+    "height": 40.0,
+    "corner_radius": 2.0,
+    "layers": 2,
+    "origin": [
+      100.0,
+      100.0
+    ],
+    "rules": {
+      "clearance": 0.2,
+      "track": 0.2,
+      "via": [
+        0.6,
+        0.3
+      ],
+      "edge_clearance": 0.5,
+      "hole_to_hole": 0.5,
+      "min_through_hole": 0.3,
+      "min_track": 0.15,
+      "why_min_track": "Freerouting may neck into a 0.5 mm-pitch DFN pin; JLCPCB 2-layer builds 0.127 mm"
+    },
+    "notes": "2 layers: F.Cu signal + GND pour, B.Cu signal + GND pour, both poured after routing.",
+    "zones": [
+      {
+        "name": "vbus",
+        "net": "VBUS",
+        "layers": [
+          "F.Cu"
+        ],
+        "priority": 1,
+        "rect": [
+          6.5,
+          24.9,
+          11.6,
+          31.1
+        ],
+        "why": "the receptacle's four VBUS pins to the switch's source leads: up to 3 A"
+      },
+      {
+        "name": "vout",
+        "net": "VOUT",
+        "layers": [
+          "F.Cu"
+        ],
+        "priority": 2,
+        "polygon": [
+          [
+            12.9,
+            24.0
+          ],
+          [
+            12.9,
+            29.8
+          ],
+          [
+            16.4,
+            29.8
+          ],
+          [
+            16.4,
+            27.6
+          ],
+          [
+            26.8,
+            27.6
+          ],
+          [
+            26.8,
+            17.0
+          ],
+          [
+            18.4,
+            17.0
+          ],
+          [
+            18.4,
+            22.6
+          ],
+          [
+            14.6,
+            22.6
+          ],
+          [
+            14.6,
+            24.0
+          ]
+        ],
+        "why": "the switch's drain pad to the terminal's + pin and the TVS: up to 3 A"
+      }
+    ]
+  },
+  "placement": {
+    "usb:J?": {
+      "edge": "left",
+      "y": 8.0,
+      "overhang": 0.6,
+      "why": "plug seats with the shell 0.6 mm proud of the left edge, lower half, level with the output switch"
+    },
+    "out:J?": {
+      "edge": "right",
+      "y": 8.0,
+      "overhang": 0.0,
+      "why": "output wires leave the right edge, straight across from the receptacle"
+    },
+    "pd:Q?": {
+      "at": [
+        13.0,
+        28.0
+      ],
+      "rot": 0,
+      "why": "output switch between the receptacle's VBUS pins and the terminal: source leads facing VBUS, drain pad facing the terminal"
+    },
+    "pd:U?": {
+      "at": [
+        5.6,
+        9.0
+      ],
+      "why": "PD controller top-left, leaving the strip left of the DIP switch free for its voltage labels"
+    },
+    "pd:SW?": {
+      "at": [
+        19.5,
+        10.0
+      ],
+      "rot": 0,
+      "why": "voltage DIP switch top-right, reachable with a fingertip"
+    },
+    "out:D?": {
+      "at": [
+        21.0,
+        18.6
+      ],
+      "rot": 0,
+      "why": "output TVS above the terminal"
+    },
+    "led:R?": {
+      "at": [
+        9.0,
+        20.0
+      ],
+      "why": "output LED in the middle-left, below the DIP switch's labels"
+    },
+    "pd:R4?": {
+      "at": [
+        5.6,
+        14.6
+      ],
+      "rot": 90,
+      "why": "ISET resistor below the controller"
+    },
+    "pd:R5?": {
+      "at": [
+        9.8,
+        33.0
+      ],
+      "rot": 0,
+      "why": "GATE series resistor beside the switch it drives"
+    }
+  },
+  "route": {
+    "passes": 30,
+    "fanout": true,
+    "solve_s": 300,
+    "why": "default ladder"
+  },
+  "stitch_pitch": 5.0,
+  "silk": {
+    "words": {
+      "led:D?": "OUT",
+      "usb:J?": "PD IN"
+    },
+    "switches": [
+      {
+        "part": "out:J?",
+        "pads": [
+          "1",
+          "2"
+        ],
+        "words": {
+          "GND": "-"
+        },
+        "else": "+",
+        "why": "+ at the terminal pin on VOUT, - at GND"
+      }
+    ],
+    "title": [
+      {
+        "text": "HeyPCB PD Trigger",
+        "y": 16.0,
+        "size": 1.2,
+        "bold": true
+      },
+      {
+        "text": "SW1 on 5V, 2 9V, 3 12V, 4 15V",
+        "y": 18.4,
+        "size": 0.8
+      },
+      {
+        "text": "all off 20V, 3 A request",
+        "y": 20.4,
+        "size": 0.8
+      },
+      {
+        "text": "rev {revision}  heypcb-kicad",
+        "y": 22.4,
+        "size": 0.8
+      }
+    ]
+  },
+  "captions": {
+    "place_3d": "USB-C on the left edge, the HUSB238 above the output switch, the voltage DIP switch below, the output terminal on the right edge.",
+    "done_3d": "HUSB238 PD sink, DIP-selected 5/9/12/15/20 V at 3 A, DMP3013SFV output switch, SMBJ24A TVS, output LED."
+  }
+}

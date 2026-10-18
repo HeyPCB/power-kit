@@ -1,0 +1,316 @@
+{
+  "name": "power_usb_meter",
+  "title": "HeyPCB USB-C Power Meter - inline INA226 on a 10 mOhm shunt, Qwiic out",
+  "revision": "A",
+  "brief": "USB-C inline power monitor: USB-C in and USB-C out with VBUS through a 10 mOhm shunt and CC1, CC2, D+ and D- passed straight through, an INA226 measuring current, VBUS voltage and power, read over a Qwiic connector at 0x40; 32 x 24 mm, 2 layers.",
+  "blocks": [
+    {
+      "block": "usbc_pd_in",
+      "as": "uin",
+      "title": "USB-C in",
+      "nets": {
+        "VBUS": "VBUS_IN",
+        "CC1": "CC1",
+        "CC2": "CC2",
+        "USB_DP": "USB_DP",
+        "USB_DM": "USB_DM"
+      },
+      "values": {
+        "J?": "USB-C IN"
+      }
+    },
+    {
+      "block": "usbc_pd_in",
+      "as": "uout",
+      "title": "USB-C out",
+      "nets": {
+        "VBUS": "VBUS_OUT",
+        "CC1": "CC1",
+        "CC2": "CC2",
+        "USB_DP": "USB_DP",
+        "USB_DM": "USB_DM"
+      },
+      "values": {
+        "J?": "USB-C OUT"
+      }
+    },
+    {
+      "block": "ina226_shunt_10m",
+      "as": "mon",
+      "title": "INA226 on a 10 mOhm shunt",
+      "nets": {
+        "LINE_IN": "VBUS_IN",
+        "LINE_OUT": "VBUS_OUT",
+        "3V3": "3V3",
+        "I2C_SDA": "I2C_SDA",
+        "I2C_SCL": "I2C_SCL"
+      }
+    },
+    {
+      "block": "qwiic_sm04b",
+      "as": "qw",
+      "title": "Qwiic",
+      "nets": {
+        "3V3": "3V3",
+        "I2C_SDA": "I2C_SDA",
+        "I2C_SCL": "I2C_SCL"
+      }
+    }
+  ],
+  "pwrFlags": [
+    "GND",
+    "VBUS_IN",
+    "3V3"
+  ],
+  "netClasses": [
+    {
+      "name": "PWR",
+      "nets": [
+        "VBUS_IN",
+        "VBUS_OUT"
+      ],
+      "track": 0.8,
+      "clearance": 0.2,
+      "via": [
+        0.8,
+        0.4
+      ],
+      "why": "3 A (5 A with a 5 A cable) through the shunt; the paths are carried in board.zones, 0.8 mm is the target for the short entries"
+    }
+  ],
+  "board": {
+    "width": 32.0,
+    "height": 24.0,
+    "corner_radius": 2.0,
+    "layers": 2,
+    "origin": [
+      100.0,
+      100.0
+    ],
+    "rules": {
+      "clearance": 0.2,
+      "track": 0.2,
+      "via": [
+        0.6,
+        0.3
+      ],
+      "edge_clearance": 0.5,
+      "hole_to_hole": 0.5,
+      "min_through_hole": 0.3,
+      "min_track": 0.15,
+      "why_min_track": "Freerouting necks into the TSSOP-10's 0.5 mm-pitch pins; JLCPCB 2-layer builds 0.127 mm"
+    },
+    "notes": "2 layers: F.Cu signal + GND pour, B.Cu signal + GND pour, both poured after routing.",
+    "zones": [
+      {
+        "name": "vbus_in",
+        "net": "VBUS_IN",
+        "layers": [
+          "F.Cu",
+          "B.Cu"
+        ],
+        "priority": 1,
+        "stitch": 0.9,
+        "via": [
+          0.6,
+          0.3
+        ],
+        "polygon": [
+          [
+            4.0,
+            10.6
+          ],
+          [
+            8.6,
+            10.6
+          ],
+          [
+            8.6,
+            15.2
+          ],
+          [
+            13.2,
+            15.2
+          ],
+          [
+            13.2,
+            12.6
+          ],
+          [
+            15.6,
+            12.6
+          ],
+          [
+            15.6,
+            20.0
+          ],
+          [
+            4.0,
+            20.0
+          ]
+        ],
+        "why": "the in-receptacle's four VBUS pins (a strip under its body joins the upper pair to the lower) to the shunt's in-side pad: up to 3 A. Both layers, stitched: the signal and GND pins between the VBUS pins cut a single-layer strip (measured on power_efuse_usb); it reaches up above the shunt pad, where only the INA226's own sense track runs, so stitch vias fit beside the pad (the USB 2.0 and CC tracks cross the band under the shunt and cut the top layer there)"
+      },
+      {
+        "name": "vbus_out",
+        "net": "VBUS_OUT",
+        "layers": [
+          "F.Cu",
+          "B.Cu"
+        ],
+        "priority": 2,
+        "stitch": 0.9,
+        "via": [
+          0.6,
+          0.3
+        ],
+        "polygon": [
+          [
+            16.4,
+            12.6
+          ],
+          [
+            18.8,
+            12.6
+          ],
+          [
+            18.8,
+            15.2
+          ],
+          [
+            23.4,
+            15.2
+          ],
+          [
+            23.4,
+            10.6
+          ],
+          [
+            28.0,
+            10.6
+          ],
+          [
+            28.0,
+            20.0
+          ],
+          [
+            16.4,
+            20.0
+          ]
+        ],
+        "why": "the shunt's out-side pad to the out-receptacle's four VBUS pins: up to 3 A, both layers, stitched; it reaches up above the shunt pad, where only the INA226's own sense track runs, so stitch vias fit beside the pad (the USB 2.0 and CC tracks cross the band under the shunt and cut the top layer there)"
+      }
+    ],
+    "keepouts": [
+      {
+        "name": "vbus_plane_band",
+        "rect": [
+          9.4,
+          12.6,
+          22.6,
+          20.0
+        ],
+        "layers": [
+          "B.Cu"
+        ],
+        "no": [
+          "tracks"
+        ],
+        "why": "keeps B.Cu whole between the receptacles under both VBUS zones: on the first zoned build the CC2 track crossed at y 16.27 on B.Cu and split each side's bottom-layer VBUS plane in two, so the stitch via beside the shunt pad joined nothing. Over the receptacles themselves B.Cu stays open, where D+ / D- cross between their A and B rows (a keep-out reaching x 4-28 left USB_DM and 3V3 unrouted)"
+      }
+    ]
+  },
+  "placement": {
+    "uin:J?": {
+      "edge": "left",
+      "y": 2.0,
+      "overhang": 0.6,
+      "why": "supply side plugs in from the left edge"
+    },
+    "uout:J?": {
+      "edge": "right",
+      "y": 2.0,
+      "overhang": 0.6,
+      "why": "load side plugs in from the right edge, straight across"
+    },
+    "qw:J?": {
+      "lock": [
+        0.0,
+        3.7
+      ],
+      "rot": 180,
+      "why": "Qwiic cable leaves the top edge; locked 1.1 mm in from where edge placement put it, whose mounting pads touched the edge (0 mm, DRC)"
+    },
+    "mon:R1?": {
+      "at": [
+        16.0,
+        16.0
+      ],
+      "rot": 0,
+      "why": "shunt on the straight VBUS line between the two receptacles, in-side pad left"
+    },
+    "mon:U?": {
+      "at": [
+        16.0,
+        10.4
+      ],
+      "rot": 0,
+      "why": "INA226 just above the shunt: Vin+ / Vin- (pins 10 / 9) close to its pads, I2C pins toward the Qwiic connector"
+    },
+    "mon:C?": {
+      "at": [
+        12.4,
+        10.4
+      ],
+      "rot": 90,
+      "why": "VS decoupling beside the INA226"
+    },
+    "mon:R2?": {
+      "at": [
+        20.0,
+        8.6
+      ],
+      "rot": 90,
+      "why": "SDA pull-up beside the INA226"
+    },
+    "mon:R3?": {
+      "at": [
+        21.6,
+        8.6
+      ],
+      "rot": 90,
+      "why": "SCL pull-up beside the INA226"
+    }
+  },
+  "route": {
+    "passes": 30,
+    "fanout": true,
+    "solve_s": 300,
+    "why": "default ladder"
+  },
+  "stitch_pitch": 5.0,
+  "silk": {
+    "words": {
+      "uin:J?": "IN",
+      "uout:J?": "OUT",
+      "qw:J?": "QWIIC 0x40"
+    },
+    "title": [
+      {
+        "text": "HeyPCB USB-C Power Meter",
+        "y": 20.6,
+        "size": 1.0,
+        "bold": true
+      },
+      {
+        "text": "INA226  10 mOhm  rev {revision}",
+        "y": 22.2,
+        "size": 0.8
+      }
+    ]
+  },
+  "captions": {
+    "place_3d": "USB-C in on the left edge and out on the right, the shunt and the INA226 between them, the Qwiic connector on the top edge.",
+    "done_3d": "Inline USB-C power meter: INA226 on a 10 mOhm shunt in VBUS, CC and USB 2.0 passed through, Qwiic out."
+  }
+}
